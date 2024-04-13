@@ -5,13 +5,10 @@ from .functions import *
 
 def dQdt(t, Q, En, v, matrices, all_params, target_info, S):
     """function to be used by solve_ivp in Capsule.solve_neutron_transport"""
-    # L = all_params[:,5]  # make L = 0.75 * radius??
-
-    # currently, 90% of neutrons that leave a capsule due to the -v/L term are put into the next layer outward. 10% go 'inwards' a layer
-    # frac_out = 0.9
 
     # layer thicknesses are given in params
     layer_thickness = all_params[:,5]
+    
     # R is the radius of the outer edge of each layer
     R = [np.sum(layer_thickness[:i+1], axis=0) for i,_ in enumerate(layer_thickness)]
 
